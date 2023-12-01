@@ -47,6 +47,5 @@ jobs:
           key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('./yarn.lock') }}
       - name: Run lint
         run: yarn lint
-      prettierが入ったら誰か有効化よろしくお願いします
       - name: Run check format
         run: yarn format:check
