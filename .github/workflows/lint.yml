@@ -44,7 +44,7 @@ jobs:
           cache-name: cache-node-modules
         with:
           path: '**/node_modules'
-          key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('./yarn.lock') }}
       - name: Run lint
         run: yarn lint
       # prettierが入ったら誰か有効化よろしくお願いします
