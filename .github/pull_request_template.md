@@ -1,7 +1,7 @@
 # 概要
 
 # リンク
-- [your qiita ID]()
+- Qiita ID: [your qiita ID]()
 <!--（あれば）
-- [記事]()
+- 記事: [タイトル]()
 -->
