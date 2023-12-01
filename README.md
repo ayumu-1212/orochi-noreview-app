@@ -1,36 +1,20 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 桜花極彩大蛇斬 - 毎日誰かのプルリクをレビュー無しでマージする Advent Calendar 2023
+## 概要
+[アドベントカレンダー](https://qiita.com/advent-calendar/2023/dena-orochi)
 
-## Getting Started
+DeNAの社内には 「桜花極彩大蛇斬」 という自分の好きなこと・得意なスキルを発表する勉強会があります。
+その 桜花極彩大蛇斬が[こちらのアドベントカレンダー](https://qiita.com/mejileben/items/b9c0d450eb0d96044089)を噂で聞き、企画したものになります！
 
-First, run the development server:
+「空っぽの Next.js プロジェクトに、25 日間毎日誰かが Pull Request 出して問答無用でマージしていき、12 月 25 日に何ができているでしょう？」 アドベントカレンダーです。
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+なんの役にも立たないコンポーネント作って設置するもよし、 自分の思う最強の ESLint ルールを書き込むもよし、 Firebase 等の PaaS を接続する実装をしてセットアップ手順を README に残しておくもよしです。 ネタ実装でも 大 歓 迎 です。
+
+さぁて、いったい最後はどんなアプリケーションになってることやら・・・
+
+# セットアップ
+## devcontainerで開発する場合
+- .env.sampleを参考にコンテナのポートを定義する
+```sh
+$ cat .env.sample > .env
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Reopen in Container
