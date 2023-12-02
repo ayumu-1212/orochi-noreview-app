@@ -1,0 +1,22 @@
+{
+  "name": "orochi-app-dev",
+  "dockerComposeFile": ["../compose.yml"],
+  "service": "orochi-app",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "EditorConfig.EditorConfig"
+      ],
+      "settings": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+          "source.fixAll.eslint": true
+        }
+      }
+    }
+  },
+  "workspaceFolder": "/app/src"
+}
