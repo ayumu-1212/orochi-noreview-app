@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import { cva } from '../../styled-system/css'
 import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -14,9 +15,47 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const emojiList = bgPattern.variantMap.emoji
+  const emoji = emojiList[Math.floor(Math.random() * emojiList.length)]
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={`${inter.className} ${bgPattern({ emoji: emoji })}`}>
+        {children}
+      </body>
     </html>
   )
 }
+
+const bgPattern = cva({
+  base: {
+    backgroundRepeat: 'repeat',
+  },
+  variants: {
+    emoji: {
+      apple: {
+        backgroundImage: 'url(../../public/1f40d_apple.png)',
+      },
+      google: {
+        backgroundImage: 'url(../../public/1f40d_google.png)',
+      },
+      meta: {
+        backgroundImage: 'url(../../public/1f40d_meta.png)',
+      },
+      microsoft: {
+        backgroundImage: 'url(../../public/1f40d_microsoft.png)',
+      },
+      openmoji: {
+        backgroundImage: 'url(../../public/1f40d_openmoji.png)',
+      },
+      samsung: {
+        backgroundImage: 'url(../../public/1f40d_samsung.png)',
+      },
+      twitter: {
+        backgroundImage: 'url(../../public/1f40d_twitter.png)',
+      },
+    },
+  },
+  defaultVariants: {
+    emoji: 'apple',
+  },
+})

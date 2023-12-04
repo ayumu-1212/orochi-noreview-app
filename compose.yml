@@ -1,0 +1,25 @@
+version: "3.9"
+services:
+  orochi-app:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      target: development
+    ports:
+      - "${OROCHI_PORT}:3000"
+    volumes:
+      - type: bind
+        source: ./
+        target: /app/src
+      - type: volume
+        source: app-node_modules
+        target: /app/src/node_modules
+      - type: volume
+        source: app-next
+        target: /app/src/.next
+    tty: true
+    stdin_open: true
+    init: true
+volumes:
+  app-node_modules:
+  app-next:
