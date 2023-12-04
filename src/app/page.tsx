@@ -2,6 +2,7 @@
 import Image from 'next/image'
 import styles from './page.module.css'
 import * as VFX from 'react-vfx'
+import { MouseStalker } from '@/components'
 
 const shine = `
     precision mediump float;
@@ -25,6 +26,7 @@ const shine = `
 export default function Home() {
   return (
     <main className={styles.main}>
+      <MouseStalker />
       <div className={styles.center}>
         <div>
           <VFX.VFXProvider>
