@@ -3,6 +3,9 @@ import Image from 'next/image'
 import styles from './page.module.css'
 import * as VFX from 'react-vfx'
 import { MouseStalker } from '@/components'
+import { useState } from 'react'
+import { cva } from '../../styled-system/css'
+import useKonami from 'use-konami'
 
 const shine = `
     precision mediump float;
@@ -24,8 +27,20 @@ const shine = `
         gl_FragColor = vec4(2, .3, .6, col.a) * level;
     }`
 export default function Home() {
+  const emojiList = bgPattern.variantMap.emoji
+  const initEmoji =
+    emojiList[Math.floor(Math.random() * (emojiList.length - 1))]
+  const [emoji, setEmoji] = useState(initEmoji)
+  const [title, setTitle] = useState('桜花極彩大蛇斬')
+
+  useKonami({
+    onUnlock: () => {
+      setEmoji('chanabe')
+      setTitle('ちゃなべ')
+    },
+  })
   return (
-    <main className={styles.main}>
+    <main className={`${styles.main} ${bgPattern({ emoji: emoji })}`}>
       <MouseStalker />
       <div className={styles.center}>
         <div>
@@ -37,7 +52,7 @@ export default function Home() {
                 fontWeight: 'bold',
               }}
             >
-              桜花極彩大蛇斬
+              {title}
             </VFX.VFXSpan>
           </VFX.VFXProvider>
         </div>
@@ -97,3 +112,40 @@ export default function Home() {
     </main>
   )
 }
+
+const bgPattern = cva({
+  base: {
+    backgroundRepeat: 'repeat',
+  },
+  variants: {
+    emoji: {
+      apple: {
+        backgroundImage: 'url(../../public/1f40d_apple.png)',
+      },
+      google: {
+        backgroundImage: 'url(../../public/1f40d_google.png)',
+      },
+      meta: {
+        backgroundImage: 'url(../../public/1f40d_meta.png)',
+      },
+      microsoft: {
+        backgroundImage: 'url(../../public/1f40d_microsoft.png)',
+      },
+      openmoji: {
+        backgroundImage: 'url(../../public/1f40d_openmoji.png)',
+      },
+      samsung: {
+        backgroundImage: 'url(../../public/1f40d_samsung.png)',
+      },
+      twitter: {
+        backgroundImage: 'url(../../public/1f40d_twitter.png)',
+      },
+      chanabe: {
+        backgroundImage: 'url(../../public/chanabe.png)',
+      },
+    },
+  },
+  defaultVariants: {
+    emoji: 'apple',
+  },
+})

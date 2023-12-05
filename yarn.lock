@@ -3075,6 +3075,11 @@ uri-js@^4.2.2:
   dependencies:
     punycode "^2.1.0"
 
+use-konami@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/use-konami/-/use-konami-1.0.1.tgz#7bdca59e37bba347b21f1bafca1eca59e6596531"
+  integrity sha512-oqLN0zMKnzCc2eHoPlTq63eZrigCTGPSizUHiqB0tmZE1FDD8ieP0U670YmEIodsUvt2eT0JHLzs603uj30+TA==
+
 util-deprecate@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/util-deprecate/-/util-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"
