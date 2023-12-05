@@ -1,7 +1,7 @@
 'use client'
 import { useState } from 'react'
 import { css } from '../../../styled-system/css'
-import { smallestCommons } from './calc'
+import { gcd, lcm } from './calc'
 
 export default function Home() {
   const [p, setP] = useState(0)
@@ -9,7 +9,7 @@ export default function Home() {
   const [l, setL] = useState(0)
 
   const calcL = (p: number, q: number) => {
-    const l = smallestCommons([p, q])
+    const l = lcm(p, q)
     setL(l)
   }
 
