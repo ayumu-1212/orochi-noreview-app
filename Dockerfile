@@ -9,7 +9,7 @@ USER node
 
 WORKDIR /app/src
 
-COPY --chown=node:node ./package.json ./yarn.lock ./
+COPY --chown=node:node ./package.json ./yarn.lock ./panda.config.ts ./
 
 RUN yarn install
 

@@ -9,7 +9,7 @@
     "start": "next start",
     "lint": "next lint",
     "format": "yarn format:check --write",
-    "format:check": "prettier './**/*.{js,jsx,ts,tsx,json}' --check --ignore-path .gitignore"
+    "format:check": "prettier './**/*.{js,jsx,ts,tsx,json}' --check"
   },
   "dependencies": {
     "next": "14.0.3",
