@@ -1,6 +1,6 @@
 'use client'
 import { useState } from 'react'
-import { css } from '../../../styled-system/css'
+import { css } from '../../../../styled-system/css'
 import { gcd, lcm } from './calc'
 
 export default function Home() {
@@ -60,7 +60,7 @@ export default function Home() {
   }
 
   return (
-    <main className={mainStyle}>
+    <main>
       <h2>公開鍵と秘密鍵を作る</h2>
       <div>
         <span>P = </span>
@@ -180,13 +180,6 @@ export default function Home() {
     </main>
   )
 }
-
-const mainStyle = css({
-  padding: '10',
-  height: '100vh',
-  background:
-    'linear-gradient(to bottom, transparent, rgb(214, 219, 220)) rgb(255, 255, 255)',
-})
 
 const buttonStyle = css({
   border: '1px solid #333',
