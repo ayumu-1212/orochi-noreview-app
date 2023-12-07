@@ -16,11 +16,17 @@ type SmilyStatus = ComponentProps<typeof Smily>['status']
 export const MineSweeper = ({ cols, rows, bombs }: Props) => {
   const [blocks, setBlocks] = useState<BlockContentProps[][]>([[]])
   const [smilyStatus, setSmilyStatus] = useState<SmilyStatus>('inprogress')
+  const [times, setTimes] = useState<number>(0)
 
   useEffect(() => {
     const initBlocks = getInitBlocks({ cols, rows, bombs })
     setBlocks(initBlocks)
-  }, [])
+    setSmilyStatus('inprogress')
+  }, [times])
+
+  const handleReset = () => {
+    setTimes((prev) => prev + 1)
+  }
 
   const handleClick = (x: number, y: number) => {
     const tmpBlocks = blocks
@@ -54,7 +60,7 @@ export const MineSweeper = ({ cols, rows, bombs }: Props) => {
     <div className={boxStyle}>
       <div className={statusBoxStyle}>
         <ElectronicSign num={bombs} />
-        <Smily status={smilyStatus} />
+        <Smily status={smilyStatus} onClick={handleReset} />
         <ElectronicSign num={bombs} />
       </div>
       <div className={gameFieldStyle}>
