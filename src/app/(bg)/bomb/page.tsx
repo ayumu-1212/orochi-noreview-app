@@ -22,7 +22,8 @@ const boxStyle = css({
   backgroundColor: 'rgba(255,255,255,0.9)',
   width: '80%',
   maxWidth: '820px',
-  padding: '2rem',
+  paddingTop: '2rem',
+  paddingBottom: '5rem',
   margin: '5em auto',
 })
 

@@ -24,7 +24,7 @@ export const MineSweeper = ({ cols, rows, bombs }: Props) => {
     setBlocks(initBlocks)
     setSmilyStatus('inprogress')
     setFlags(0)
-  }, [times])
+  }, [times, cols, rows, bombs])
 
   const handleReset = () => {
     setTimes((prev) => prev + 1)
