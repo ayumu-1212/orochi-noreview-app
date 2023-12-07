@@ -23,8 +23,30 @@ export const MineSweeper = ({ cols, rows, bombs }: Props) => {
   }, [])
 
   const handleClick = (x: number, y: number) => {
-    console.log(x)
-    console.log(y)
+    const tmpBlocks = blocks
+    const block = tmpBlocks[y][x]
+    if (block.open) return
+    if (block.bomb) {
+      setSmilyStatus('gameover')
+      const overBlocks = tmpBlocks.map((row) =>
+        row.map((b) => {
+          b.open = true
+          return b
+        }),
+      )
+      setBlocks(overBlocks)
+      return
+    }
+    const nextBlocks = tmpBlocks.map((r, ri) => {
+      if (ri !== y) return r
+      return r.map((b, bi) => {
+        if (bi !== x) return b
+        const tmpB = b
+        tmpB.open = true
+        return tmpB
+      })
+    })
+    setBlocks(nextBlocks)
   }
 
   return (
