@@ -44,16 +44,26 @@ export const MineSweeper = ({ cols, rows, bombs }: Props) => {
       return
     }
     // ちゃんとコピーしないと反映されない
-    const nextBlocks = tmpBlocks.map((r, ri) => {
-      if (ri !== y) return r
-      return r.map((b, bi) => {
-        if (bi !== x) return b
+    let openCount = 0
+    const nextBlocks: BlockContentProps[][] = []
+    tmpBlocks.forEach((r, ri) => {
+      const nextRow: BlockContentProps[] = []
+      r.forEach((b, bi) => {
         const tmpB = b
-        tmpB.open = true
-        return tmpB
+        if (ri === y && bi === x) {
+          tmpB.open = true
+        }
+        if (tmpB.open === true) {
+          openCount++
+        }
+        nextRow.push(tmpB)
       })
+      nextBlocks.push(nextRow)
     })
     setBlocks(nextBlocks)
+    if (openCount === cols * rows - bombs) {
+      setSmilyStatus('clear')
+    }
   }
 
   return (
