@@ -37,6 +37,7 @@ export const MineSweeper = ({ cols, rows, bombs }: Props) => {
       setBlocks(overBlocks)
       return
     }
+    // ちゃんとコピーしないと反映されない
     const nextBlocks = tmpBlocks.map((r, ri) => {
       if (ri !== y) return r
       return r.map((b, bi) => {
@@ -82,6 +83,8 @@ export const MineSweeper = ({ cols, rows, bombs }: Props) => {
 const boxStyle = css({
   padding: '1.5rem',
   border: 'solid 2px gray',
+  maxWidth: '400px',
+  backgroundColor: 'gray.300',
 })
 
 const gameFieldStyle = css({
@@ -91,11 +94,12 @@ const gameFieldStyle = css({
 
 const gameFieldRowStyle = css({
   display: 'flex',
+  justifyContent: 'center',
 })
 
 const statusBoxStyle = css({
   padding: '0.5rem',
   display: 'flex',
   flexDirection: 'row',
-  justifyContent: 'space-between',
+  justifyContent: 'space-around',
 })

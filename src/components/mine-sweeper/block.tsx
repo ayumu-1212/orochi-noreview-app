@@ -35,16 +35,24 @@ export const Block = ({ onClick, x, y, block }: Props) => {
 
 const blockStyle = cva({
   base: {
-    width: '1.5rem',
-    height: '1.5rem',
+    width: '2rem',
+    height: '2rem',
+    fontSize: '1.5rem',
+    lineHeight: '2rem',
+    textAlign: 'center',
   },
   variants: {
     open: {
       true: {
-        backgroundColor: 'gray.50',
+        backgroundColor: 'gray.400',
+        border: 'solid 1px black',
       },
       false: {
-        backgroundColor: 'gray.900',
+        backgroundColor: 'gray.300',
+        borderTop: 'solid 3px white',
+        borderRight: 'solid 3px black',
+        borderBottom: 'solid 3px black',
+        borderLeft: 'solid 3px white',
       },
     },
   },

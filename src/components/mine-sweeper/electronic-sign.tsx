@@ -9,10 +9,13 @@ export const ElectronicSign = ({ num }: Props) => {
 }
 
 const signStyle = css({
-  height: '2rem',
-  width: '4rem',
+  height: '3rem',
+  width: '5rem',
   color: 'red',
-  fontSize: '1.5rem',
+  fontSize: '2.5rem',
+  lineHeight: '2.5rem',
   fontWeight: 'bold',
   backgroundColor: 'black',
+  textAlign: 'right',
+  padding: '0.25rem',
 })

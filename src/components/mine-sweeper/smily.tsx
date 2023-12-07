@@ -18,5 +18,12 @@ export const Smily = ({ status }: Props) => {
 const blockStyle = css({
   height: '3rem',
   width: '3rem',
-  backgroundColor: 'gray.900',
+  fontSize: '2.5rem',
+  textAlign: 'center',
+  lineHeight: '2.5rem',
+  backgroundColor: 'gray.300',
+  borderTop: 'solid 3px white',
+  borderRight: 'solid 3px black',
+  borderBottom: 'solid 3px black',
+  borderLeft: 'solid 3px white',
 })
