@@ -89,7 +89,6 @@ export const MineSweeper = ({ cols, rows, bombs }: Props) => {
 const boxStyle = css({
   padding: '1.5rem',
   border: 'solid 2px gray',
-  maxWidth: '400px',
   backgroundColor: 'gray.300',
 })
 

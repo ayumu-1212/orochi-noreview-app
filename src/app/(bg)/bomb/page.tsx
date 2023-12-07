@@ -10,7 +10,9 @@ export default function Home() {
     <main>
       <div className={boxStyle}>
         <h1 className={h1Style}>マインスイーパー</h1>
-        <MineSweeper cols={cols} rows={rows} bombs={bombs} />
+        <div className={gameContainerStyle}>
+          <MineSweeper cols={cols} rows={rows} bombs={bombs} />
+        </div>
       </div>
     </main>
   )
@@ -29,4 +31,9 @@ const h1Style = css({
   fontWeight: 'bold',
   textAlign: 'center',
   paddingBottom: '1rem',
+})
+
+const gameContainerStyle = css({
+  display: 'flex',
+  justifyContent: 'center',
 })
