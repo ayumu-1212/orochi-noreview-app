@@ -1,19 +1,16 @@
 'use client'
-import { useState } from 'react'
 import { css } from '../../../../styled-system/css'
+import { MineSweeper } from '@/components'
 
 export default function Home() {
-  // const [p, setP] = useState<number>(17)
-
-  // const calcN = (p: number, q: number) => {
-  //   const n = p * q
-  //   setN(n)
-  // }
-
+  const cols = 9
+  const rows = 9
+  const bombs = 10
   return (
     <main>
       <div className={boxStyle}>
         <h1 className={h1Style}>マインスイーパー</h1>
+        <MineSweeper cols={cols} rows={rows} bombs={bombs} />
       </div>
     </main>
   )
