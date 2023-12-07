@@ -1,18 +1,23 @@
 import { css } from '../../../styled-system/css'
 
 type Props = {
+  onClick: () => void
   status: 'inprogress' | 'gameover' | 'clear'
 }
 
-export const Smily = ({ status }: Props) => {
-  const getFacilExpression = ({ status }: Props) => {
+export const Smily = ({ status, onClick }: Props) => {
+  const getFacilExpression = (status: Props['status']) => {
     if (status === 'clear') return '😎'
     if (status === 'gameover') return '😵'
     return '😃'
   }
-  const content = getFacilExpression({ status })
+  const content = getFacilExpression(status)
 
-  return <div className={blockStyle}>{content}</div>
+  return (
+    <div className={blockStyle} onClick={onClick}>
+      {content}
+    </div>
+  )
 }
 
 const blockStyle = css({
@@ -26,4 +31,5 @@ const blockStyle = css({
   borderRight: 'solid 3px black',
   borderBottom: 'solid 3px black',
   borderLeft: 'solid 3px white',
+  cursor: 'pointer',
 })

@@ -46,6 +46,7 @@ const blockStyle = cva({
       true: {
         backgroundColor: 'gray.400',
         border: 'solid 1px black',
+        cursor: 'auto',
       },
       false: {
         backgroundColor: 'gray.300',
@@ -53,6 +54,7 @@ const blockStyle = cva({
         borderRight: 'solid 3px black',
         borderBottom: 'solid 3px black',
         borderLeft: 'solid 3px white',
+        cursor: 'cursor',
       },
     },
   },
