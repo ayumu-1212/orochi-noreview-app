@@ -59,6 +59,13 @@ export default function Home() {
           </h2>
         </a>
       </div>
+      <div>
+        <a href="/bomb" className={styles.card}>
+          <h2>
+            マインスイーパー<span>-&gt;</span>
+          </h2>
+        </a>
+      </div>
     </main>
   )
 }
