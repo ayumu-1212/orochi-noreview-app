@@ -17,11 +17,13 @@ export const MineSweeper = ({ cols, rows, bombs }: Props) => {
   const [blocks, setBlocks] = useState<BlockContentProps[][]>([[]])
   const [smilyStatus, setSmilyStatus] = useState<SmilyStatus>('inprogress')
   const [times, setTimes] = useState<number>(0)
+  const [flags, setFlags] = useState<number>(0)
 
   useEffect(() => {
     const initBlocks = getInitBlocks({ cols, rows, bombs })
     setBlocks(initBlocks)
     setSmilyStatus('inprogress')
+    setFlags(0)
   }, [times])
 
   const handleReset = () => {
@@ -38,7 +40,13 @@ export const MineSweeper = ({ cols, rows, bombs }: Props) => {
       r.forEach((b, bi) => {
         const tmpB = b
         if (ri === y && bi === x) {
-          tmpB.flag = !tmpB.flag
+          if (tmpB.flag) {
+            tmpB.flag = !tmpB.flag
+            setFlags((prev) => prev - 1)
+          } else {
+            tmpB.flag = !tmpB.flag
+            setFlags((prev) => prev + 1)
+          }
         }
         nextRow.push(tmpB)
       })
@@ -71,9 +79,8 @@ export const MineSweeper = ({ cols, rows, bombs }: Props) => {
         const tmpB = b
         if (ri === y && bi === x) {
           tmpB.open = true
-        }
-        if (tmpB.open === true) {
           openCount++
+          if (tmpB.flag) setFlags((prev) => prev - 1)
         }
         nextRow.push(tmpB)
       })
@@ -88,7 +95,7 @@ export const MineSweeper = ({ cols, rows, bombs }: Props) => {
   return (
     <div className={boxStyle}>
       <div className={statusBoxStyle}>
-        <ElectronicSign num={bombs} />
+        <ElectronicSign num={flags} />
         <Smily status={smilyStatus} onClick={handleReset} />
         <ElectronicSign num={bombs} />
       </div>
