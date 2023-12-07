@@ -64,8 +64,8 @@ export const MineSweeper = ({ cols, rows, bombs }: Props) => {
                 return (
                   <Block
                     key={`block-${x}.${y}`}
-                    x={y}
-                    y={x}
+                    x={x}
+                    y={y}
                     onClick={handleClick}
                     block={block}
                   />
