@@ -28,6 +28,25 @@ export const MineSweeper = ({ cols, rows, bombs }: Props) => {
     setTimes((prev) => prev + 1)
   }
 
+  const handleFlag = (x: number, y: number) => {
+    const tmpBlocks = blocks
+    const block = tmpBlocks[y][x]
+    if (block.open) return
+    const nextBlocks: BlockContentProps[][] = []
+    tmpBlocks.forEach((r, ri) => {
+      const nextRow: BlockContentProps[] = []
+      r.forEach((b, bi) => {
+        const tmpB = b
+        if (ri === y && bi === x) {
+          tmpB.flag = !tmpB.flag
+        }
+        nextRow.push(tmpB)
+      })
+      nextBlocks.push(nextRow)
+    })
+    setBlocks(nextBlocks)
+  }
+
   const handleClick = (x: number, y: number) => {
     const tmpBlocks = blocks
     const block = tmpBlocks[y][x]
@@ -84,6 +103,7 @@ export const MineSweeper = ({ cols, rows, bombs }: Props) => {
                     x={x}
                     y={y}
                     onClick={handleClick}
+                    onContextMenu={handleFlag}
                     block={block}
                   />
                 )

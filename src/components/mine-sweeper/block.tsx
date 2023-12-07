@@ -1,7 +1,9 @@
+import { MouseEvent } from 'react'
 import { cva } from '../../../styled-system/css'
 
 type Props = {
   onClick: (x: number, y: number) => void
+  onContextMenu: (x: number, y: number) => void
   x: number
   y: number
   block: BlockContentProps
@@ -14,7 +16,7 @@ export type BlockContentProps = {
   aroundSum: number
 }
 
-export const Block = ({ onClick, x, y, block }: Props) => {
+export const Block = ({ onClick, onContextMenu, x, y, block }: Props) => {
   const getContent = ({ open, bomb, flag, aroundSum }: BlockContentProps) => {
     if (open && bomb) return '💣'
     if (open && aroundSum) return String(aroundSum)
@@ -23,10 +25,16 @@ export const Block = ({ onClick, x, y, block }: Props) => {
   }
   const content = getContent(block)
 
+  const handleContextMenu = (e: MouseEvent<HTMLDivElement>) => {
+    e.preventDefault()
+    onContextMenu(x, y)
+  }
+
   return (
     <div
       className={blockStyle({ open: block.open })}
       onClick={() => onClick(x, y)}
+      onContextMenu={handleContextMenu}
     >
       {content}
     </div>
