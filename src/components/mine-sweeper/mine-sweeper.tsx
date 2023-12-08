@@ -4,6 +4,7 @@ import { Smily } from './smily'
 import { ElectronicSign } from './electronic-sign'
 import { useState, ComponentProps, useEffect } from 'react'
 import { getInitBlocks } from './get-init-blocks'
+import { openBlocks } from './open-blocks'
 
 type Props = {
   cols: number
@@ -55,11 +56,10 @@ export const MineSweeper = ({ cols, rows, bombs }: Props) => {
     setBlocks(nextBlocks)
   }
 
-  const handleClick = (x: number, y: number) => {
+  const handleOpen = (x: number, y: number) => {
     const tmpBlocks = blocks
-    const block = tmpBlocks[y][x]
-    if (block.open) return
-    if (block.bomb) {
+    if (tmpBlocks[y][x].open) return
+    if (tmpBlocks[y][x].bomb) {
       setSmilyStatus('gameover')
       const overBlocks = tmpBlocks.map((row) =>
         row.map((b) => {
@@ -70,22 +70,15 @@ export const MineSweeper = ({ cols, rows, bombs }: Props) => {
       setBlocks(overBlocks)
       return
     }
+    const openedBlocks = openBlocks(tmpBlocks, y, x, rows - 1, cols - 1)
     // ちゃんとコピーしないと反映されない
     let openCount = 0
-    const nextBlocks: BlockContentProps[][] = []
-    tmpBlocks.forEach((r, ri) => {
-      const nextRow: BlockContentProps[] = []
-      r.forEach((b, bi) => {
-        const tmpB = b
-        if (ri === y && bi === x) {
-          tmpB.open = true
-          openCount++
-          if (tmpB.flag) setFlags((prev) => prev - 1)
-        }
-        nextRow.push(tmpB)
-      })
-      nextBlocks.push(nextRow)
-    })
+    const nextBlocks = openedBlocks.map((r) =>
+      r.map((b) => {
+        if (b.open) openCount++
+        return b
+      }),
+    )
     setBlocks(nextBlocks)
     if (openCount === cols * rows - bombs) {
       setSmilyStatus('clear')
@@ -109,7 +102,7 @@ export const MineSweeper = ({ cols, rows, bombs }: Props) => {
                     key={`block-${x}.${y}`}
                     x={x}
                     y={y}
-                    onClick={handleClick}
+                    onClick={handleOpen}
                     onContextMenu={handleFlag}
                     block={block}
                   />
