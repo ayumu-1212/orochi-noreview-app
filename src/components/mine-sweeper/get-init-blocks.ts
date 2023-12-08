@@ -1,5 +1,5 @@
 import { ComponentProps } from 'react'
-import { Block, BlockContentProps } from './block'
+import { BlockContentProps } from './block'
 import { getRandoms } from '@/utils'
 import { MineSweeper } from './mine-sweeper'
 

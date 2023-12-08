@@ -53,14 +53,14 @@ export default function Home() {
       </div>
 
       <div>
-        <a href="/rsa" className={styles.card}>
+        <a href="rsa" className={styles.card}>
           <h2>
             RSA暗号を作ってみよう！<span>-&gt;</span>
           </h2>
         </a>
       </div>
       <div>
-        <a href="/bomb" className={styles.card}>
+        <a href="bomb" className={styles.card}>
           <h2>
             マインスイーパー<span>-&gt;</span>
           </h2>
