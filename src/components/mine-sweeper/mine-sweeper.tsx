@@ -17,18 +17,29 @@ type SmilyStatus = ComponentProps<typeof Smily>['status']
 export const MineSweeper = ({ cols, rows, bombs }: Props) => {
   const [blocks, setBlocks] = useState<BlockContentProps[][]>([[]])
   const [smilyStatus, setSmilyStatus] = useState<SmilyStatus>('inprogress')
-  const [times, setTimes] = useState<number>(0)
+  const [resets, setResets] = useState<number>(0)
   const [flags, setFlags] = useState<number>(0)
+  const [time, setTime] = useState<number>(0)
+  const [timeOutId, setTimeOutId] = useState<NodeJS.Timeout>()
 
   useEffect(() => {
     const initBlocks = getInitBlocks({ cols, rows, bombs })
     setBlocks(initBlocks)
     setSmilyStatus('inprogress')
     setFlags(0)
-  }, [times, cols, rows, bombs])
+    setTime(0)
+  }, [resets, cols, rows, bombs])
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setTime((t) => t + 1)
+    }, 1000)
+    setTimeOutId(id)
+    return () => clearInterval(id)
+  }, [resets])
 
   const handleReset = () => {
-    setTimes((prev) => prev + 1)
+    setResets((prev) => prev + 1)
   }
 
   const handleFlag = (x: number, y: number) => {
@@ -60,7 +71,6 @@ export const MineSweeper = ({ cols, rows, bombs }: Props) => {
     const tmpBlocks = blocks
     if (tmpBlocks[y][x].open) return
     if (tmpBlocks[y][x].bomb) {
-      setSmilyStatus('gameover')
       const overBlocks = tmpBlocks.map((row) =>
         row.map((b) => {
           b.open = true
@@ -68,6 +78,8 @@ export const MineSweeper = ({ cols, rows, bombs }: Props) => {
         }),
       )
       setBlocks(overBlocks)
+      clearInterval(timeOutId)
+      setSmilyStatus('gameover')
       return
     }
     const openedBlocks = openBlocks(tmpBlocks, y, x, rows - 1, cols - 1)
@@ -81,6 +93,7 @@ export const MineSweeper = ({ cols, rows, bombs }: Props) => {
     )
     setBlocks(nextBlocks)
     if (openCount === cols * rows - bombs) {
+      clearInterval(timeOutId)
       setSmilyStatus('clear')
     }
   }
@@ -88,9 +101,9 @@ export const MineSweeper = ({ cols, rows, bombs }: Props) => {
   return (
     <div className={boxStyle}>
       <div className={statusBoxStyle}>
-        <ElectronicSign num={flags} />
+        <ElectronicSign num={bombs - flags} />
         <Smily status={smilyStatus} onClick={handleReset} />
-        <ElectronicSign num={bombs} />
+        <ElectronicSign num={time} />
       </div>
       <div className={gameFieldStyle}>
         {blocks.map((row, y) => {
