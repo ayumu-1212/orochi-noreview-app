@@ -49,6 +49,11 @@ export default function Home() {
             bombs={LEVEL_PROPS[level].bombs}
           />
         </div>
+        <div className={linkWrapperStyle}>
+          <a href="../" className={linkStyle}>
+            トップへ
+          </a>
+        </div>
       </div>
     </main>
   )
@@ -85,4 +90,17 @@ const h2Style = css({
 const gameContainerStyle = css({
   display: 'flex',
   justifyContent: 'center',
+  marginBottom: '1.5rem',
+})
+
+const linkWrapperStyle = css({
+  display: 'flex',
+  justifyContent: 'center',
+})
+
+const linkStyle = css({
+  textDecoration: 'underline',
+  _hover: {
+    color: 'green',
+  },
 })

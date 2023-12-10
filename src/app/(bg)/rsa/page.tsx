@@ -199,6 +199,11 @@ export default function Home() {
             </button>
           </p>
         </section>
+        <div className={linkWrapperStyle}>
+          <a href="../" className={linkStyle}>
+            トップへ
+          </a>
+        </div>
       </div>
     </main>
   )
@@ -260,4 +265,16 @@ const buttonStyle = css({
   cursor: 'pointer',
   backgroundColor: 'rgba(0,128,0,0.4)',
   _hover: { backgroundColor: 'rgba(0,128,0,0.2)' },
+})
+
+const linkWrapperStyle = css({
+  display: 'flex',
+  justifyContent: 'center',
+})
+
+const linkStyle = css({
+  textDecoration: 'underline',
+  _hover: {
+    color: 'green',
+  },
 })
