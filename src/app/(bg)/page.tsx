@@ -32,11 +32,11 @@ export default function Home() {
   useEffect(() => {
     // アクセス数表示を偽造するため、適当な4桁の数字を生成
     // 現在のUNIX時間（エポック秒）を取得し、10秒単位に丸める
-    const intNow = Math.floor(Date.now() / 10000);
-    const strNow = intNow.toString();
+    const intNow = Math.floor(Date.now() / 10000)
+    const strNow = intNow.toString()
     // 残りから下4桁を取得
-    const count = parseInt(strNow.substring(strNow.length - 4));
-    setAccessCount(count);
+    const count = parseInt(strNow.substring(strNow.length - 4))
+    setAccessCount(count)
   }, [])
 
   useKonami({
@@ -86,7 +86,9 @@ export default function Home() {
       </div>
 
       <div>
-        <p className={styles.accessCount}>⭐️⭐️⭐️あなたは<span>{accessCount}</span>人目の訪問者です！⭐️⭐️⭐️</p>
+        <p className={styles.accessCount}>
+          ⭐️⭐️⭐️あなたは<span>{accessCount}</span>人目の訪問者です！⭐️⭐️⭐️
+        </p>
       </div>
     </main>
   )

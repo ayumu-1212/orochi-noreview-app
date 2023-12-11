@@ -12,7 +12,7 @@ export default function Home() {
   const [extremeClicks, setExtremeClicks] = useState(0)
 
   const handleExtremeClick = () => {
-    setExtremeClicks(prevClicks => prevClicks + 1)
+    setExtremeClicks((prevClicks) => prevClicks + 1)
     if (extremeClicks >= 10) {
       setDifficulty('extreme')
     }
@@ -27,7 +27,7 @@ export default function Home() {
       let ballX = canvas.width / 3
       let ballY = canvas.height / 3
       const ballRadius = 10
-      let ballSpeedX = Math.random() * 6 - 3;
+      let ballSpeedX = Math.random() * 6 - 3
       let ballSpeedY = 2
 
       const paddleHeight = 15
@@ -41,7 +41,12 @@ export default function Home() {
       const brickPaddingY = 10
 
       // 難易度に基づいてbrickWidthとbrickColumnCountとpaddleWidthを設定
-      let brickWidth = 0, brickColumnCount = 0, paddleWidth = 0, brickOffsetTop = 0, brickOffsetLeft = 0, brickPaddingX = 0
+      let brickWidth = 0,
+        brickColumnCount = 0,
+        paddleWidth = 0,
+        brickOffsetTop = 0,
+        brickOffsetLeft = 0,
+        brickPaddingX = 0
       switch (difficulty) {
         case 'easy':
           brickWidth = 110
@@ -229,7 +234,7 @@ export default function Home() {
           //初期位置に戻す
           ballX = canvas.width / 3
           ballY = canvas.height / 3
-          ballSpeedX = Math.random() * 6 - 3;
+          ballSpeedX = Math.random() * 6 - 3
           ballSpeedY = 2
 
           // ブロックをリセット
@@ -269,13 +274,26 @@ export default function Home() {
   return (
     <main>
       <div className={mainStyle}>
-
         <div>
           <p className={currentDiffStyle}>現在の難易度: {difficulty}</p>
-          <button className={buttonStyle} onClick={() => setDifficulty('easy')}>Easy</button>
-          <button className={buttonStyle} onClick={() => setDifficulty('medium')}>Medium</button>
-          <button className={buttonStyle} onClick={() => setDifficulty('hard')}>Hard</button>
-          <button className={extremeClicks >= 10 ? showExtreme : hideExtreme} onClick={handleExtremeClick}>Extreme</button>
+          <button className={buttonStyle} onClick={() => setDifficulty('easy')}>
+            Easy
+          </button>
+          <button
+            className={buttonStyle}
+            onClick={() => setDifficulty('medium')}
+          >
+            Medium
+          </button>
+          <button className={buttonStyle} onClick={() => setDifficulty('hard')}>
+            Hard
+          </button>
+          <button
+            className={extremeClicks >= 10 ? showExtreme : hideExtreme}
+            onClick={handleExtremeClick}
+          >
+            Extreme
+          </button>
         </div>
 
         <div>
@@ -283,9 +301,7 @@ export default function Home() {
         </div>
 
         <div>
-          <a href="../">
-            トップへ
-          </a>
+          <a href="../">トップへ</a>
         </div>
       </div>
     </main>
@@ -307,7 +323,7 @@ const buttonStyle = css({
   padding: '15px 32px',
   margin: '4px',
   cursor: 'pointer',
-  borderRadius: '8px'
+  borderRadius: '8px',
 })
 
 const currentDiffStyle = css({
@@ -330,5 +346,5 @@ const showExtreme = css({
   padding: '15px 32px',
   margin: '4px',
   cursor: 'pointer',
-  borderRadius: '8px'
+  borderRadius: '8px',
 })
