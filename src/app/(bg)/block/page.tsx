@@ -122,7 +122,7 @@ export default function Home() {
       }
 
       // ブロックの配列を作成
-      const bricks = []
+      const bricks: { x: number; y: number; status: number }[][] = []
       for (let c = 0; c < brickColumnCount; c++) {
         bricks[c] = []
         for (let r = 0; r < brickRowCount; r++) {

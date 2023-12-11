@@ -35,7 +35,7 @@ export default function Home() {
     const intNow = Math.floor(Date.now() / 10000);
     const strNow = intNow.toString();
     // 残りから下4桁を取得
-    const count = strNow.substring(strNow.length - 4);
+    const count = parseInt(strNow.substring(strNow.length - 4));
     setAccessCount(count);
   }, [])
 
