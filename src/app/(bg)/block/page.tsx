@@ -1,5 +1,5 @@
 'use client'
-import React, { useRef, useEffect } from 'react'
+import React, { useRef, useEffect, useState } from 'react'
 import { css } from '../../../../styled-system/css'
 
 /*
@@ -8,6 +8,15 @@ import { css } from '../../../../styled-system/css'
 
 export default function Home() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const [difficulty, setDifficulty] = useState('easy')
+  const [extremeClicks, setExtremeClicks] = useState(0)
+
+  const handleExtremeClick = () => {
+    setExtremeClicks(prevClicks => prevClicks + 1)
+    if (extremeClicks >= 10) {
+      setDifficulty('extreme')
+    }
+  }
 
   useEffect(() => {
     if (canvasRef.current) {
@@ -18,15 +27,47 @@ export default function Home() {
       let ballX = canvas.width / 3
       let ballY = canvas.height / 3
       const ballRadius = 10
-      let ballSpeedX = 2
+      let ballSpeedX = Math.random() * 6 - 3;
       let ballSpeedY = 2
 
-      const paddleWidth = 75
       const paddleHeight = 15
-      let paddleX = (canvas.width - paddleWidth) / 2
       let paddleSpeed = 7
       let rightPressed = false
       let leftPressed = false
+
+      // ブロックの設定
+      const brickRowCount = 5
+      const brickHeight = 20
+      const brickPadding = 10
+      const brickOffsetTop = 30
+      const brickOffsetLeft = 30
+
+      // 難易度に基づいてbrickWidthとbrickColumnCountとpaddleWidthを設定
+      let brickWidth = 0, brickColumnCount = 0, paddleWidth = 0
+      switch (difficulty) {
+        case 'easy':
+          brickWidth = 115
+          brickColumnCount = 6
+          paddleWidth = 200
+          break
+        case 'medium':
+          brickWidth = 65
+          brickColumnCount = 10
+          paddleWidth = 100
+          break
+        case 'hard':
+          brickWidth = 40
+          brickColumnCount = 15
+          paddleWidth = 70
+          break
+        case 'extreme':
+          brickWidth = 15
+          brickColumnCount = 30
+          paddleWidth = 30
+          break
+      }
+      let totalBricks = brickRowCount * brickColumnCount
+      let paddleX = (canvas.width - paddleWidth) / 2
 
       const keyDownHandler = (e: KeyboardEvent) => {
         if (e.key === 'Right' || e.key === 'ArrowRight') {
@@ -79,11 +120,68 @@ export default function Home() {
         context.fill()
         context.closePath()
       }
+
+      // ブロックの配列を作成
+      const bricks = []
+      for (let c = 0; c < brickColumnCount; c++) {
+        bricks[c] = []
+        for (let r = 0; r < brickRowCount; r++) {
+          bricks[c][r] = { x: 0, y: 0, status: 1 }
+        }
+      }
+
+      // ブロックを描画する関数
+      const drawBricks = () => {
+        for (let c = 0; c < brickColumnCount; c++) {
+          for (let r = 0; r < brickRowCount; r++) {
+            if (bricks[c][r].status === 1) {
+              const brickX = c * (brickWidth + brickPadding) + brickOffsetLeft
+              const brickY = r * (brickHeight + brickPadding) + brickOffsetTop
+              bricks[c][r].x = brickX
+              bricks[c][r].y = brickY
+              context.beginPath()
+              context.rect(brickX, brickY, brickWidth, brickHeight)
+              context.fillStyle = '#0095DD'
+              context.fill()
+              context.closePath()
+            }
+          }
+        }
+      }
+
+      // ブロックとボールの衝突検出
+      const collisionDetection = () => {
+        for (let c = 0; c < brickColumnCount; c++) {
+          for (let r = 0; r < brickRowCount; r++) {
+            const b = bricks[c][r]
+            if (b.status === 1) {
+              if (
+                ballX > b.x &&
+                ballX < b.x + brickWidth &&
+                ballY > b.y &&
+                ballY < b.y + brickHeight
+              ) {
+                ballSpeedY = -ballSpeedY
+                b.status = 0
+                totalBricks -= 1
+                if (totalBricks === 0) {
+                  // すべてのブロックが消えたときの処理
+                  alert('Congratulations!!!!')
+                  document.location.reload()
+                }
+              }
+            }
+          }
+        }
+      }
+
       const update = () => {
         context.fillStyle = '#ADD8E6'
         context.fillRect(0, 0, canvas.width, canvas.height)
         drawBall()
         drawPaddle()
+        drawBricks()
+        collisionDetection()
 
         ballX += ballSpeedX
         ballY += ballSpeedY
@@ -121,8 +219,16 @@ export default function Home() {
           //初期位置に戻す
           ballX = canvas.width / 3
           ballY = canvas.height / 3
-          ballSpeedX = 2
+          ballSpeedX = Math.random() * 6 - 3;
           ballSpeedY = 2
+
+          // ブロックをリセット
+          for (let c = 0; c < brickColumnCount; c++) {
+            for (let r = 0; r < brickRowCount; r++) {
+              bricks[c][r].status = 1
+            }
+          }
+          totalBricks = brickRowCount * brickColumnCount
         }
 
         if (rightPressed) {
@@ -148,20 +254,71 @@ export default function Home() {
         document.removeEventListener('mousemove', mouseMoveHandler)
       }
     }
-  }, [])
+  }, [difficulty])
 
   return (
     <main>
       <div className={mainStyle}>
-        <canvas ref={canvasRef} width={800} height={600} />
+
+        <div>
+          <p className={currentDiffStyle}>現在の難易度: {difficulty}</p>
+          <button className={buttonStyle} onClick={() => setDifficulty('easy')}>Easy</button>
+          <button className={buttonStyle} onClick={() => setDifficulty('medium')}>Medium</button>
+          <button className={buttonStyle} onClick={() => setDifficulty('hard')}>Hard</button>
+          <button className={extremeClicks >= 10 ? showExtreme : hideExtreme} onClick={handleExtremeClick}>Extreme</button>
+        </div>
+
+        <div>
+          <canvas ref={canvasRef} width={800} height={600} />
+        </div>
+
+        <div>
+          <a href="../">
+            トップへ
+          </a>
+        </div>
       </div>
     </main>
   )
 }
 
 const mainStyle = css({
+  position: 'relative',
   display: 'flex',
+  flexDirection: 'column',
   justifyContent: 'center',
   alignItems: 'center',
   height: '100vh',
+})
+
+const buttonStyle = css({
+  backgroundColor: '#0095DD',
+  color: 'white',
+  padding: '15px 32px',
+  margin: '4px',
+  cursor: 'pointer',
+  borderRadius: '8px'
+})
+
+const currentDiffStyle = css({
+  padding: '15px 32px',
+  textAlign: 'center',
+  textDecoration: 'none',
+  fontSize: '20px',
+  fontWeight: 'bold',
+})
+
+const hideExtreme = css({
+  opacity: '0',
+  cursor: 'pointer',
+  width: '1px',
+})
+
+const showExtreme = css({
+  backgroundColor: '#dd0044',
+  color: 'white',
+  padding: '15px 32px',
+  margin: '4px',
+  cursor: 'pointer',
+  borderRadius: '8px'
 })
