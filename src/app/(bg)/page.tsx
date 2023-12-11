@@ -3,7 +3,7 @@ import Image from 'next/image'
 import styles from './page.module.css'
 import * as VFX from 'react-vfx'
 import { MouseStalker } from '@/components'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import useKonami from 'use-konami'
 
 const shine = `
@@ -27,6 +27,17 @@ const shine = `
     }`
 export default function Home() {
   const [title, setTitle] = useState('桜花極彩大蛇斬')
+  const [accessCount, setAccessCount] = useState(0)
+
+  useEffect(() => {
+    // アクセス数表示を偽造するため、適当な4桁の数字を生成
+    // 現在のUNIX時間（エポック秒）を取得し、10秒単位に丸める
+    const intNow = Math.floor(Date.now() / 10000);
+    const strNow = intNow.toString();
+    // 残りから下4桁を取得
+    const count = strNow.substring(strNow.length - 4);
+    setAccessCount(count);
+  }, [])
 
   useKonami({
     onUnlock: () => {
@@ -72,6 +83,10 @@ export default function Home() {
             ブロック崩し<span>-&gt;</span>
           </h2>
         </a>
+      </div>
+
+      <div>
+        <p className={styles.accessCount}>⭐️⭐️⭐️あなたは<span>{accessCount}</span>人目の訪問者です！⭐️⭐️⭐️</p>
       </div>
     </main>
   )
