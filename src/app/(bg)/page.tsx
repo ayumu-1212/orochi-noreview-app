@@ -66,6 +66,13 @@ export default function Home() {
           </h2>
         </a>
       </div>
+      <div>
+        <a href="block" className={styles.card}>
+          <h2>
+            ブロック崩し<span>-&gt;</span>
+          </h2>
+        </a>
+      </div>
     </main>
   )
 }
