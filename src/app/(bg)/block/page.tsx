@@ -38,32 +38,42 @@ export default function Home() {
       // ブロックの設定
       const brickRowCount = 5
       const brickHeight = 20
-      const brickPadding = 10
-      const brickOffsetTop = 30
-      const brickOffsetLeft = 30
+      const brickPaddingY = 10
 
       // 難易度に基づいてbrickWidthとbrickColumnCountとpaddleWidthを設定
-      let brickWidth = 0, brickColumnCount = 0, paddleWidth = 0
+      let brickWidth = 0, brickColumnCount = 0, paddleWidth = 0, brickOffsetTop = 0, brickOffsetLeft = 0, brickPaddingX = 0
       switch (difficulty) {
         case 'easy':
-          brickWidth = 115
-          brickColumnCount = 6
+          brickWidth = 110
+          brickColumnCount = 4
           paddleWidth = 200
+          brickOffsetTop = 70
+          brickOffsetLeft = 70
+          brickPaddingX = 70
           break
         case 'medium':
-          brickWidth = 65
-          brickColumnCount = 10
+          brickWidth = 75
+          brickColumnCount = 7
           paddleWidth = 100
+          brickOffsetTop = 45
+          brickOffsetLeft = 45
+          brickPaddingX = 30
           break
         case 'hard':
           brickWidth = 40
           brickColumnCount = 15
           paddleWidth = 70
+          brickOffsetTop = 30
+          brickOffsetLeft = 30
+          brickPaddingX = 10
           break
         case 'extreme':
           brickWidth = 15
-          brickColumnCount = 30
-          paddleWidth = 30
+          brickColumnCount = 49
+          paddleWidth = 50
+          brickOffsetTop = 8
+          brickOffsetLeft = 8
+          brickPaddingX = 1
           break
       }
       let totalBricks = brickRowCount * brickColumnCount
@@ -135,8 +145,8 @@ export default function Home() {
         for (let c = 0; c < brickColumnCount; c++) {
           for (let r = 0; r < brickRowCount; r++) {
             if (bricks[c][r].status === 1) {
-              const brickX = c * (brickWidth + brickPadding) + brickOffsetLeft
-              const brickY = r * (brickHeight + brickPadding) + brickOffsetTop
+              const brickX = c * (brickWidth + brickPaddingX) + brickOffsetLeft
+              const brickY = r * (brickHeight + brickPaddingY) + brickOffsetTop
               bricks[c][r].x = brickX
               bricks[c][r].y = brickY
               context.beginPath()
