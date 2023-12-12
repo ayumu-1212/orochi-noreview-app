@@ -67,11 +67,12 @@ const playBattle = (count: number, isWinMan: boolean) => {
 
 /**
  * ヘビと人間がURLバーで戦う
- * 開発サーバーでインクリメンタルビルド時にちらつくかもしれないけどリロードしたら直る
- * ここは許して
+ * FIXME: 開発サーバーでインクリメンタルビルド時にちらつくかもしれないけどリロードしたら直る(許して)
  * @param count 何回目の実行か
  */
 export const battleWithSnake = () => {
+  if (typeof window === 'undefined') return
+
   /**
    * ヘビのほうが強いので人間の勝率は10%
    * @see 参考文献 [人間vs蛇 では、どの蛇が最強だと思いますか？](https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q1493089569)
