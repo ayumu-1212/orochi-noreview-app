@@ -30,3 +30,9 @@ $ cat .env.sample > .env
 ```sh
 /app/src $ yarn dev
 ```
+
+# テスト
+
+```
+$ yarn test
+```
