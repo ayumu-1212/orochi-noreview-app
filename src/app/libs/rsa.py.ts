@@ -1,24 +1,35 @@
+const calc_gcd = `
+def gcd(a, b):
+   if b == 0:
+      return a
+   return gcd(b, a % b)
+`
+
+const calc_lcm =
+  calc_gcd +
+  `
+def lcm(a, b):
+   return (a * b) / gcd(a, b)
+`
+
 export const calc_n = `
 def calcN(p, q):
   n = p * q
   return n
 `
 
-export const calc_l = `
-def gcd(a, b):
-   if b == 0:
-      return a
-   return gcd(b, a % b)
-
-def lcm(a, b):
-   return (a * b) / gcd(a, b)
+export const calc_l =
+  calc_lcm +
+  `
 
 def calcL(p, q):
    l = lcm(p - 1, q - 1)
    return l
 `
 
-export const calc_proposal_e = `
+export const calc_proposal_e =
+  calc_gcd +
+  `
 def proposalE(l):
    tmp_es = []
    for e in range(2, l):
