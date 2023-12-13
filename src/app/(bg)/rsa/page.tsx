@@ -69,26 +69,26 @@ export default function Home() {
   const calcN = (p: number, q: number) => {
     const script =
       calc_n +
-      `print(calcN(${p}, ${q}))
+      `print(calc_n(${p}, ${q}))
 `
     runPython(script)
     setTarget('n')
   }
 
   const calcL = (p: number, q: number) => {
-    const script = calc_l + `print(calcL(${p}, ${q}))`
+    const script = calc_l + `print(calc_l(${p}, ${q}))`
     runPython(script)
     setTarget('l')
   }
 
   const proposalE = (l: number) => {
-    const script = calc_proposal_e + `print(proposalE(${l}))`
+    const script = calc_proposal_e + `print(proposal_e(${l}))`
     runPython(script)
     setTarget('es')
   }
 
   const proposalD = (e: number, l: number) => {
-    const script = calc_proposal_d + `print(proposalD(${e}, ${l}))`
+    const script = calc_proposal_d + `print(proposal_d(${e}, ${l}))`
 
     runPython(script)
     setTarget('ds')

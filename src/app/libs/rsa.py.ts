@@ -13,7 +13,7 @@ def lcm(a, b):
 `
 
 export const calc_n = `
-def calcN(p, q):
+def calc_n(p, q):
   n = p * q
   return n
 `
@@ -22,7 +22,7 @@ export const calc_l =
   calc_lcm +
   `
 
-def calcL(p, q):
+def calc_l(p, q):
    l = lcm(p - 1, q - 1)
    return l
 `
@@ -30,7 +30,7 @@ def calcL(p, q):
 export const calc_proposal_e =
   calc_gcd +
   `
-def proposalE(l):
+def proposal_e(l):
    tmp_es = []
    for e in range(2, l):
       if gcd(e, l) == 1:
@@ -39,7 +39,7 @@ def proposalE(l):
 `
 
 export const calc_proposal_d = `
-def proposalD(e, l):
+def proposal_d(e, l):
   tmp_ds = []
   for d in range(2, l):
     if ((e * d) % l == 1):
