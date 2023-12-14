@@ -1,0 +1,18 @@
+name: nice-orochi
+on:
+  pull_request:
+    types: [opened]
+
+jobs:
+  comment-on-pull-request:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `![](https://ayumu-1212.github.io/orochi-noreview-app/nice-orochi.jpg)`
+            })
