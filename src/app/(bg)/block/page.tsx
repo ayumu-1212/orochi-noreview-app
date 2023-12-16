@@ -10,6 +10,7 @@ export default function Home() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [difficulty, setDifficulty] = useState('easy')
   const [extremeClicks, setExtremeClicks] = useState(0)
+  const [remainingBallCount, setRemainingBallCount] = useState(3);
 
   const handleExtremeClick = () => {
     setExtremeClicks((prevClicks) => prevClicks + 1)
@@ -168,7 +169,7 @@ export default function Home() {
       const drawRemainingBallCount = () => {
         context.font = '16px Arial'
         context.fillStyle = '#0095DD'
-        context.fillText('残ボール数: 3', 15, 30)
+        context.fillText(`残ボール数: ${remainingBallCount}`, 15, 30)
       }
 
       // ブロックとボールの衝突検出
@@ -252,6 +253,8 @@ export default function Home() {
             }
           }
           totalBricks = brickRowCount * brickColumnCount
+
+          setRemainingBallCount(prev => prev - 1)
         }
 
         if (rightPressed) {
@@ -277,7 +280,7 @@ export default function Home() {
         document.removeEventListener('mousemove', mouseMoveHandler)
       }
     }
-  }, [difficulty])
+  }, [difficulty, remainingBallCount])
 
   return (
     <main>
