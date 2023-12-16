@@ -10,7 +10,7 @@ export default function Home() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [difficulty, setDifficulty] = useState('easy')
   const [extremeClicks, setExtremeClicks] = useState(0)
-  const [remainingBallCount, setRemainingBallCount] = useState(3);
+  const [remainingBallCount, setRemainingBallCount] = useState(3)
 
   const handleExtremeClick = () => {
     setExtremeClicks((prevClicks) => prevClicks + 1)
