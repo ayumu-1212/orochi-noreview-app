@@ -10,6 +10,7 @@ export default function Home() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [difficulty, setDifficulty] = useState('easy')
   const [extremeClicks, setExtremeClicks] = useState(0)
+  const [remainingBallCount, setRemainingBallCount] = useState(3)
 
   const handleExtremeClick = () => {
     setExtremeClicks((prevClicks) => prevClicks + 1)
@@ -19,6 +20,12 @@ export default function Home() {
   }
 
   useEffect(() => {
+    /**
+     * NOTE: StrictModeによる二重レンダリング検知用フラグ
+     * これがないと残りのボール数を減らす処理が2回実行されてしまって辛い
+     */
+    let ignore = false
+
     if (canvasRef.current) {
       const canvas = canvasRef.current
       const context = canvas.getContext('2d')
@@ -164,6 +171,13 @@ export default function Home() {
         }
       }
 
+      // 残りのボール数を描画する関数
+      const drawRemainingBallCount = () => {
+        context.font = '16px Arial'
+        context.fillStyle = '#0095DD'
+        context.fillText(`残ボール数: ${remainingBallCount}`, 15, 30)
+      }
+
       // ブロックとボールの衝突検出
       const collisionDetection = () => {
         for (let c = 0; c < brickColumnCount; c++) {
@@ -196,6 +210,7 @@ export default function Home() {
         drawBall()
         drawPaddle()
         drawBricks()
+        drawRemainingBallCount()
         collisionDetection()
 
         ballX += ballSpeedX
@@ -244,6 +259,17 @@ export default function Home() {
             }
           }
           totalBricks = brickRowCount * brickColumnCount
+
+          if (!ignore) {
+            const newCount = remainingBallCount - 1
+            setRemainingBallCount(newCount)
+
+            // 残りのボール数が0になったらゲームオーバーのアラートを出す
+            if (newCount === 0) {
+              alert('ゲームオーバー🐍')
+              window.location.reload()
+            }
+          }
         }
 
         if (rightPressed) {
@@ -264,12 +290,13 @@ export default function Home() {
       update()
 
       return () => {
+        ignore = true
         document.removeEventListener('keydown', keyDownHandler)
         document.removeEventListener('keyup', keyUpHandler)
         document.removeEventListener('mousemove', mouseMoveHandler)
       }
     }
-  }, [difficulty])
+  }, [difficulty, remainingBallCount])
 
   return (
     <main>
