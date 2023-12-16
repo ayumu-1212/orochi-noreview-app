@@ -20,6 +20,12 @@ export default function Home() {
   }
 
   useEffect(() => {
+    /**
+     * NOTE: StrictModeによる二重レンダリング検知用フラグ
+     * これがないと残りのボール数を減らす処理が2回実行されてしまって辛い
+     */
+    let ignore = false
+
     if (canvasRef.current) {
       const canvas = canvasRef.current
       const context = canvas.getContext('2d')
@@ -254,7 +260,9 @@ export default function Home() {
           }
           totalBricks = brickRowCount * brickColumnCount
 
-          setRemainingBallCount(prev => prev - 1)
+          if (!ignore) {
+            setRemainingBallCount(prev => prev - 1)
+          }
         }
 
         if (rightPressed) {
@@ -275,6 +283,7 @@ export default function Home() {
       update()
 
       return () => {
+        ignore = true
         document.removeEventListener('keydown', keyDownHandler)
         document.removeEventListener('keyup', keyUpHandler)
         document.removeEventListener('mousemove', mouseMoveHandler)
