@@ -164,6 +164,13 @@ export default function Home() {
         }
       }
 
+      // 残りのボール数を描画する関数
+      const drawRemainingBallCount = () => {
+        context.font = '16px Arial'
+        context.fillStyle = '#0095DD'
+        context.fillText('残ボール数: 3', 15, 30)
+      }
+
       // ブロックとボールの衝突検出
       const collisionDetection = () => {
         for (let c = 0; c < brickColumnCount; c++) {
@@ -196,6 +203,7 @@ export default function Home() {
         drawBall()
         drawPaddle()
         drawBricks()
+        drawRemainingBallCount()
         collisionDetection()
 
         ballX += ballSpeedX
