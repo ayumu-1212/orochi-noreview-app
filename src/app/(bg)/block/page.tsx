@@ -261,7 +261,14 @@ export default function Home() {
           totalBricks = brickRowCount * brickColumnCount
 
           if (!ignore) {
-            setRemainingBallCount(prev => prev - 1)
+            const newCount = remainingBallCount - 1
+            setRemainingBallCount(newCount)
+
+            // 残りのボール数が0になったらゲームオーバーのアラートを出す
+            if (newCount === 0) {
+              alert('ゲームオーバー🐍')
+              window.location.reload()
+            }
           }
         }
 
