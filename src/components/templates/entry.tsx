@@ -1,4 +1,5 @@
-import { ReactElement, ReactNode, isValidElement } from 'react'
+import { isComponentOf, toArray } from '@/helpers'
+import { ReactElement, ReactNode } from 'react'
 import { css } from '../../../styled-system/css'
 
 export const Template = ({
@@ -39,23 +40,6 @@ export const Header = ({ children }: { children: ReactNode }) => {
 
 export const Body = ({ children }: { children: ReactNode }) => {
   return children
-}
-
-function toArray<T>(items: T[] | T): T[] {
-  return Array.isArray(items) ? items : [items]
-}
-
-function isComponentOf<T extends Function>(
-  Component: T,
-  element: unknown,
-): element is T {
-  if (!isValidElement(element)) {
-    return false
-  }
-  if (typeof element.type !== 'function') {
-    return false
-  }
-  return element.type.name === Component.name
 }
 
 const boxStyle = css({
