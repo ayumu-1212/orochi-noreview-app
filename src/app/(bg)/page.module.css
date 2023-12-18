@@ -121,20 +121,6 @@
   position: relative;
 }
 
-.accessCount {
-  background-color: #00f;
-  font-weight: bold;
-  font-size: 1.3rem;
-  color: #0f0;
-}
-
-.accessCount span {
-  background-color: black;
-  color: #f00;
-  font-family: 'DSEG', sans-serif;
-  margin: 0 1rem;
-}
-
 /* Enable hover only on non-touch devices */
 @media (hover: hover) and (pointer: fine) {
   .card:hover {

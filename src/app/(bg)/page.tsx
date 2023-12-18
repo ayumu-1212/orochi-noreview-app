@@ -1,6 +1,7 @@
 'use client'
+import { AccessCount } from '@/components'
 import { useMouseStalker } from '@/hooks/mouse-stalker'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import * as VFX from 'react-vfx'
 import useKonami from 'use-konami'
 import styles from './page.module.css'
@@ -26,17 +27,6 @@ const shine = `
     }`
 export default function Home() {
   const [title, setTitle] = useState('桜花極彩大蛇斬')
-  const [accessCount, setAccessCount] = useState(0)
-
-  useEffect(() => {
-    // アクセス数表示を偽造するため、適当な4桁の数字を生成
-    // 現在のUNIX時間（エポック秒）を取得し、10秒単位に丸める
-    const intNow = Math.floor(Date.now() / 10000)
-    const strNow = intNow.toString()
-    // 残りから下4桁を取得
-    const count = parseInt(strNow.substring(strNow.length - 4))
-    setAccessCount(count)
-  }, [])
 
   useKonami({
     onUnlock: () => {
@@ -86,9 +76,7 @@ export default function Home() {
       </div>
 
       <div>
-        <p className={styles.accessCount}>
-          ⭐️⭐️⭐️あなたは<span>{accessCount}</span>人目の訪問者です！⭐️⭐️⭐️
-        </p>
+        <AccessCount />
       </div>
     </main>
   )
