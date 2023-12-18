@@ -1,10 +1,9 @@
 'use client'
-import Image from 'next/image'
-import styles from './page.module.css'
+import { useMouseStalker } from '@/hooks/mouse-stalker'
+import { useEffect, useState } from 'react'
 import * as VFX from 'react-vfx'
-import { MouseStalker } from '@/components'
-import { useState, useEffect } from 'react'
 import useKonami from 'use-konami'
+import styles from './page.module.css'
 
 const shine = `
     precision mediump float;
@@ -44,9 +43,10 @@ export default function Home() {
       setTitle('ちゃなべ')
     },
   })
+  useMouseStalker()
+
   return (
     <main className={styles.main}>
-      <MouseStalker />
       <div className={styles.center}>
         <div>
           <VFX.VFXProvider>
