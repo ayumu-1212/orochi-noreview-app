@@ -1,5 +1,5 @@
 'use client'
-import { AccessCount, Hero } from '@/components'
+import { AccessCount, Hero, Menu } from '@/components'
 import { useMouseStalker } from '@/hooks/mouse-stalker'
 import styles from './page.module.css'
 
@@ -13,25 +13,13 @@ export default function Home() {
       </div>
 
       <div>
-        <a href="rsa" className={styles.card}>
-          <h2>
-            RSA暗号を作ってみよう！<span>-&gt;</span>
-          </h2>
-        </a>
-      </div>
-      <div>
-        <a href="bomb" className={styles.card}>
-          <h2>
-            マインスイーパー<span>-&gt;</span>
-          </h2>
-        </a>
-      </div>
-      <div>
-        <a href="block" className={styles.card}>
-          <h2>
-            ブロック崩し<span>-&gt;</span>
-          </h2>
-        </a>
+        <Menu
+          items={[
+            { href: 'rsa', label: 'RSA暗号を作ってみよう！' },
+            { href: 'bomb', label: 'マインスイーパー' },
+            { href: 'block', label: 'ブロック崩し' },
+          ]}
+        />
       </div>
 
       <div>
