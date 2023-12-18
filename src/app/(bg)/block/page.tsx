@@ -1,6 +1,7 @@
 'use client'
 import React, { useRef, useEffect, useState } from 'react'
 import { css } from '../../../../styled-system/css'
+import { Body, Header, Template } from '@/components/templates/entry'
 
 /*
 誰かが完成させてくれることを願う
@@ -299,39 +300,44 @@ export default function Home() {
   }, [difficulty, remainingBallCount])
 
   return (
-    <main>
-      <div className={mainStyle}>
-        <div>
-          <p className={currentDiffStyle}>現在の難易度: {difficulty}</p>
-          <button className={buttonStyle} onClick={() => setDifficulty('easy')}>
-            Easy
-          </button>
-          <button
-            className={buttonStyle}
-            onClick={() => setDifficulty('medium')}
-          >
-            Medium
-          </button>
-          <button className={buttonStyle} onClick={() => setDifficulty('hard')}>
-            Hard
-          </button>
-          <button
-            className={extremeClicks >= 10 ? showExtreme : hideExtreme}
-            onClick={handleExtremeClick}
-          >
-            Extreme
-          </button>
-        </div>
+    <Template>
+      <Header>ブロック崩し</Header>
+      <Body>
+        <div className={mainStyle}>
+          <div>
+            <p className={currentDiffStyle}>現在の難易度: {difficulty}</p>
+            <button
+              className={buttonStyle}
+              onClick={() => setDifficulty('easy')}
+            >
+              Easy
+            </button>
+            <button
+              className={buttonStyle}
+              onClick={() => setDifficulty('medium')}
+            >
+              Medium
+            </button>
+            <button
+              className={buttonStyle}
+              onClick={() => setDifficulty('hard')}
+            >
+              Hard
+            </button>
+            <button
+              className={extremeClicks >= 10 ? showExtreme : hideExtreme}
+              onClick={handleExtremeClick}
+            >
+              Extreme
+            </button>
+          </div>
 
-        <div>
-          <canvas ref={canvasRef} width={800} height={600} />
+          <div>
+            <canvas ref={canvasRef} width={800} height={600} />
+          </div>
         </div>
-
-        <div>
-          <a href="../">トップへ</a>
-        </div>
-      </div>
-    </main>
+      </Body>
+    </Template>
   )
 }
 
