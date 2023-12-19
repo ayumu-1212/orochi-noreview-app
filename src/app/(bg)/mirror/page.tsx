@@ -1,37 +1,13 @@
 'use client'
-import { MineSweeper } from '@/components'
-import { Body, Header, Template } from '@/components/templates/entry'
-import { ComponentProps, useEffect, useRef } from 'react'
-import { css } from '../../../../styled-system/css'
+import { Body, Header, Template } from '@/components/templates/entry';
+import { useEffect, useRef } from 'react';
+import { css } from '../../../../styled-system/css';
 
-type LevelPropsType = {
-  name: string
-} & ComponentProps<typeof MineSweeper>
 
-const LEVEL_PROPS: LevelPropsType[] = [
-  {
-    name: 'easy',
-    cols: 7,
-    rows: 7,
-    bombs: 5,
-  },
-  {
-    name: 'normal',
-    cols: 9,
-    rows: 9,
-    bombs: 10,
-  },
-  {
-    name: 'difficult',
-    cols: 12,
-    rows: 12,
-    bombs: 20,
-  },
-]
+
 
 export default function Home() {
    const videoRef = useRef<HTMLVideoElement | null>(null);
-  // Check if 'window' is defined before using it
   const audioContext = typeof window !== 'undefined' ? new window.AudioContext() : null;
   const analyser = audioContext ? audioContext.createAnalyser() : null;
   const bufferLength = analyser ? analyser.frequencyBinCount : 0;
