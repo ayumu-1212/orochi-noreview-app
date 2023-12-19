@@ -1,8 +1,9 @@
 'use client'
-import { css } from '../../../../styled-system/css'
 import { MineSweeper } from '@/components'
-import { useState, ComponentProps } from 'react'
+import { Body, Header, Template } from '@/components/templates/entry'
+import { ComponentProps, useState } from 'react'
 import useKonami from 'use-konami'
+import { css } from '../../../../styled-system/css'
 
 type LevelPropsType = {
   name: string
@@ -38,10 +39,11 @@ export default function Home() {
     },
   })
   return (
-    <main>
-      <div className={boxStyle}>
-        <h1 className={h1Style}>マインスイーパー</h1>
-        <h2 className={h2Style}>{LEVEL_PROPS[level].name}</h2>
+    <Template>
+      <Header>マインスイーパー</Header>
+
+      <Body>
+        <h2>{LEVEL_PROPS[level].name}</h2>
         <div className={gameContainerStyle}>
           <MineSweeper
             cols={LEVEL_PROPS[level].cols}
@@ -49,58 +51,13 @@ export default function Home() {
             bombs={LEVEL_PROPS[level].bombs}
           />
         </div>
-        <div className={linkWrapperStyle}>
-          <a href="../" className={linkStyle}>
-            トップへ
-          </a>
-        </div>
-      </div>
-    </main>
+      </Body>
+    </Template>
   )
 }
-
-const boxStyle = css({
-  backgroundColor: 'rgba(255,255,255,0.9)',
-  width: '80%',
-  maxWidth: '820px',
-  paddingTop: '2rem',
-  paddingBottom: '5rem',
-  margin: '5em auto',
-})
-
-const h1Style = css({
-  fontSize: '2xl',
-  fontWeight: 'bold',
-  textAlign: 'center',
-  paddingBottom: '0.25rem',
-})
-
-const h2Style = css({
-  fontSize: 'lg',
-  textAlign: 'center',
-  paddingBottom: '0.75rem',
-  _before: {
-    content: '"~ "',
-  },
-  _after: {
-    content: '" ~"',
-  },
-})
 
 const gameContainerStyle = css({
   display: 'flex',
   justifyContent: 'center',
   marginBottom: '1.5rem',
-})
-
-const linkWrapperStyle = css({
-  display: 'flex',
-  justifyContent: 'center',
-})
-
-const linkStyle = css({
-  textDecoration: 'underline',
-  _hover: {
-    color: 'green',
-  },
 })
