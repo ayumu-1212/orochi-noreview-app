@@ -22,6 +22,7 @@ export default function Home() {
             { href: 'rsa', label: 'RSA暗号を作ってみよう！' },
             { href: 'bomb', label: 'マインスイーパー' },
             { href: 'block', label: 'ブロック崩し' },
+            { href: 'mirror', label: '鏡🪞' },
           ]}
         />
         <AccessCount />
