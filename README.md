@@ -36,3 +36,9 @@ $ cat .env.sample > .env
 ```
 $ yarn test
 ```
+
+# wasm をビルドしたい時
+
+```sh
+/app/src $ yarn build:wasm
+```

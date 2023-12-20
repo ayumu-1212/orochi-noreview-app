@@ -2,6 +2,11 @@
   "name": "orochi-noreview-app",
   "version": "0.1.0",
   "private": true,
+  "browser": {
+    "fs": false,
+    "path": false,
+    "os": false
+  },
   "scripts": {
     "prepare": "panda codegen",
     "dev": "next dev",
@@ -10,7 +15,8 @@
     "lint": "next lint",
     "format": "yarn format:check --write",
     "format:check": "prettier './**/*.{js,jsx,ts,tsx,json}' --check",
-    "test": "vitest"
+    "test": "vitest",
+    "build:wasm": "cd pkg && tinygo build -target wasm -o ../public/main.wasm -no-debug"
   },
   "dependencies": {
     "next": "14.0.3",
