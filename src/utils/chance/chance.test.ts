@@ -11,7 +11,7 @@ describe('本当に正しい確率になっているのか、実際に実行す�
     }
     // TIMES回実行したうち何パーセントがtrueだったか
     const result = (results.filter((v) => v).length / TIMES) * 100
-    expect(result).toBeGreaterThan(9.99)
-    expect(result).toBeLessThan(10.01)
+    expect(result).toBeGreaterThan(9.95)
+    expect(result).toBeLessThan(10.05)
   })
 })

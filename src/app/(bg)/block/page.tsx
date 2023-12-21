@@ -1,5 +1,5 @@
 'use client'
-import { BlockBreaker } from '@/components/block-breaker/block-breaker'
+import { BlockBreaker } from '@/components/block-breaker'
 import { Body, Header, Template } from '@/components/templates/entry'
 
 /*
