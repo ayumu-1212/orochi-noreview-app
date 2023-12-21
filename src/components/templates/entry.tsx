@@ -23,7 +23,7 @@ export const Template = ({
             {heading && heading}
             {body && <section>{body}</section>}
             <div className={linkWrapperStyle}>
-              <a href="../" className={linkStyle}>
+              <a href="./" className={linkStyle}>
                 トップへ
               </a>
             </div>
