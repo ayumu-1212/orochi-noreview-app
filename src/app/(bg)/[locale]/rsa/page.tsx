@@ -1,7 +1,7 @@
 'use client'
 import { useEffect, useState } from 'react'
 import { PythonProvider, usePython } from 'react-py'
-import { css } from '../../../../styled-system/css'
+import { css } from '../../../../../styled-system/css'
 import {
   calc_decript,
   calc_encript,

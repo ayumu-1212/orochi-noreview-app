@@ -1,23 +1,20 @@
 'use client'
-import { Body, Header, Template } from '@/components/templates/entry';
-import { useEffect, useRef } from 'react';
-import { css } from '../../../../styled-system/css';
-
-
-
+import { Body, Header, Template } from '@/components/templates/entry'
+import { useEffect, useRef } from 'react'
+import { css } from '../../../../../styled-system/css'
 
 export default function Home() {
-   const videoRef = useRef<HTMLVideoElement | null>(null);
-  const audioContext = typeof window !== 'undefined' ? new window.AudioContext() : null;
-  const analyser = audioContext ? audioContext.createAnalyser() : null;
-  const bufferLength = analyser ? analyser.frequencyBinCount : 0;
-  const dataArray = analyser ? new Uint8Array(bufferLength) : new Uint8Array(0);
+  const videoRef = useRef<HTMLVideoElement | null>(null)
+  const audioContext =
+    typeof window !== 'undefined' ? new window.AudioContext() : null
+  const analyser = audioContext ? audioContext.createAnalyser() : null
+  const bufferLength = analyser ? analyser.frequencyBinCount : 0
+  const dataArray = analyser ? new Uint8Array(bufferLength) : new Uint8Array(0)
 
   useEffect(() => {
     if (typeof window === 'undefined' || !audioContext || !analyser) {
-      return;
+      return
     }
-
 
     const initWebcam = async () => {
       try {
@@ -72,15 +69,15 @@ export default function Home() {
   return (
     <Template>
       <Header>鏡🪞</Header>
-       <Body>
-    <div className={mirrorContainerStyle}>
-      <div>
-        <video ref={videoRef} autoPlay playsInline muted />
-        <canvas id="audio-indicator" width="200" height="10"></canvas>
-      </div>
+      <Body>
+        <div className={mirrorContainerStyle}>
+          <div>
+            <video ref={videoRef} autoPlay playsInline muted />
+            <canvas id="audio-indicator" width="200" height="10"></canvas>
+          </div>
         </div>
-        </Body>
-   </Template>
+      </Body>
+    </Template>
   )
 }
 
