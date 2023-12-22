@@ -1,5 +1,5 @@
 import { css } from '../../../styled-system/css'
-import { useChangeLocale, useCurrentLocale } from '../../locales/client'
+import { useChangeLocale, useCurrentLocale } from '@/locales/client'
 
 export const LangSwitcher = () => {
   const currentLocale = useCurrentLocale()

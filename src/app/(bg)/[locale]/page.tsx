@@ -6,7 +6,7 @@ import {
   Hero as TemplateHero,
 } from '@/components/templates/root'
 import { useMouseStalker } from '@/hooks/mouse-stalker'
-import { useI18n } from '../../../locales/client'
+import { useI18n } from '@/locales/client'
 import { LangSwitcher } from '@/components/lang-switcher'
 
 export default function Home() {

@@ -1,4 +1,3 @@
-// locales/en.ts
 export default {
   rsa: 'RSA暗号を作ってみよう！',
   bomb: 'マインスイーパー',

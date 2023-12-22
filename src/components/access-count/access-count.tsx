@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react'
 import { css } from '../../../styled-system/css'
-import { useI18n } from '../../locales/client'
+import { useI18n } from '@/locales/client'
 
 export const AccessCount = () => {
   const [accessCount, setAccessCount] = useState(0)
   const t = useI18n()
-  const a = 'aaa'
 
   useEffect(() => {
     // アクセス数表示を偽造するため、適当な4桁の数字を生成
