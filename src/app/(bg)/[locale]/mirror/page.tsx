@@ -1,9 +1,10 @@
 'use client'
 import { Body, Header, Template } from '@/components/templates/entry'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { css } from '../../../../../styled-system/css'
 
 export default function Home() {
+  const [attacked, setAttacked] = useState(false)
   const videoRef = useRef<HTMLVideoElement | null>(null)
   const audioContext =
     typeof window !== 'undefined' ? new window.AudioContext() : null
@@ -72,7 +73,20 @@ export default function Home() {
       <Body>
         <div className={mirrorContainerStyle}>
           <div>
-            <video ref={videoRef} autoPlay playsInline muted />
+            <div className={imgContainerStyle}>
+              <img
+                src="/broken_glass.png"
+                alt=""
+                className={imgStyle(attacked)}
+              />
+              <video
+                ref={videoRef}
+                autoPlay
+                playsInline
+                muted
+                onClick={() => setAttacked(true)}
+              />
+            </div>
             <canvas id="audio-indicator" width="200" height="10"></canvas>
           </div>
         </div>
@@ -86,3 +100,17 @@ const mirrorContainerStyle = css({
   justifyContent: 'center',
   marginBottom: '1.5rem',
 })
+
+const imgContainerStyle = css({
+  position: 'relative',
+  overflow: 'hidden',
+})
+
+const imgStyle = (attacked: boolean) => {
+  return css({
+    position: 'absolute',
+    pointerEvents: 'none',
+    inset: 0,
+    ...(attacked ? { opacity: 1 } : { opacity: 0 }),
+  })
+}

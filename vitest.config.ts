@@ -5,11 +5,11 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   test: {
-    setupFiles: ["./vitest.setup.ts"],
+    setupFiles: ['./vitest.setup.ts'],
     globals: true,
     environment: 'jsdom',
     deps: {
-      inline: ["vitest-canvas-mock"],
+      inline: ['vitest-canvas-mock'],
     },
     environmentOptions: {
       jsdom: {
@@ -17,9 +17,9 @@ export default defineConfig({
       },
     },
     coverage: {
-      include: ["src/**"],
-      exclude: ["src/app/libs/wasm_exec.js"],
-    }
+      include: ['src/**'],
+      exclude: ['src/app/libs/wasm_exec.js'],
+    },
   },
   resolve: {
     alias: {
