@@ -3,7 +3,7 @@ import { MineSweeper } from '@/components'
 import { Body, Header, Template } from '@/components/templates/entry'
 import { ComponentProps, useState } from 'react'
 import useKonami from 'use-konami'
-import { css } from '../../../../styled-system/css'
+import { css } from '../../../../../styled-system/css'
 
 type LevelPropsType = {
   name: string
