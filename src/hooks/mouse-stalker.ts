@@ -19,7 +19,11 @@ export const useMouseStalker = () => {
     stalker.setAttribute('id', 'stalker')
     document.body.appendChild(stalker)
     return () => {
-      document.body.removeChild(stalker)
+      // To avoid NotFoundError: Failed to execute 'removeChild' on 'Node':
+      // The node to be removed is not a child of this node.
+      if (stalker.parentNode) {
+        document.body.removeChild(stalker)
+      }
     }
   }, [])
 

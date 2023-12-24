@@ -1,22 +1,21 @@
 'use client'
 import { Body, Header, Template } from '@/components/templates/entry'
 import { useEffect, useRef, useState } from 'react'
-import { css } from '../../../../styled-system/css'
+import { css } from '../../../../../styled-system/css'
 
 export default function Home() {
   const [attacked, setAttacked] = useState(false)
-
-   const videoRef = useRef<HTMLVideoElement | null>(null);
-  const audioContext = typeof window !== 'undefined' ? new window.AudioContext() : null;
-  const analyser = audioContext ? audioContext.createAnalyser() : null;
-  const bufferLength = analyser ? analyser.frequencyBinCount : 0;
-  const dataArray = analyser ? new Uint8Array(bufferLength) : new Uint8Array(0);
+  const videoRef = useRef<HTMLVideoElement | null>(null)
+  const audioContext =
+    typeof window !== 'undefined' ? new window.AudioContext() : null
+  const analyser = audioContext ? audioContext.createAnalyser() : null
+  const bufferLength = analyser ? analyser.frequencyBinCount : 0
+  const dataArray = analyser ? new Uint8Array(bufferLength) : new Uint8Array(0)
 
   useEffect(() => {
     if (typeof window === 'undefined' || !audioContext || !analyser) {
-      return;
+      return
     }
-
 
     const initWebcam = async () => {
       try {
